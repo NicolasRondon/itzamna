@@ -4,7 +4,7 @@ Itzamná, donde se extiende la classe UserManager debido a los nuevos
 campos que son agregados en el modelo User 
  
  
-##Metodos 
+## Metodos 
 ```python
 def get_full_name():
     pass # Retorna el first_name + last_name
@@ -13,7 +13,7 @@ def get_short_name():
     pass # Retorna el username
 ``` 
 
-##Campos
+## Campos
    - first_name (Requerido)
    - last_name (Requerido)
    - username  (Requerido)
