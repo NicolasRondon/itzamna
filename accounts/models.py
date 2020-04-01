@@ -107,7 +107,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     @property
     def is_admin(self):
-        return self.admin
+        return self.is_superuser
 
     @property
     def is_active(self):
