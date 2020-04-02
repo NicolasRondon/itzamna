@@ -7,15 +7,16 @@ from django.dispatch import receiver
 
 
 @receiver(post_save, sender=User)
-def send_email_user_created(sender, instance, **kwargs):
-    html_message = loader.render_to_string(
-        'newmember.html',
-        {
-            'user_name': instance.username,
-            'first_name': instance.first_name,
-            'last_name': instance.last_name,
-            'gender': instance.gender
-        }
-    )
-    send_mail('Bienvenido', 'prueba', 'nuevo@academlo.com', [instance.email], fail_silently=True, html_message=html_message)
-    print('Se envio el mail')
+def send_email_user_created(sender, instance, created, **kwargs):
+    if created:
+        html_message = loader.render_to_string(
+            'email/newmember.html',
+            {
+                'user_name': instance.username,
+                'first_name': instance.first_name,
+                'last_name': instance.last_name,
+                'gender': instance.gender
+            }
+        )
+        send_mail('Bienvenido', 'prueba', 'nuevo@academlo.com', [instance.email], fail_silently=True, html_message=html_message)
+        print('Se envio el mail de creado')
