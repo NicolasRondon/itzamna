@@ -64,7 +64,7 @@ ROOT_URLCONF = 'itzamna.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':  [os.path.join(os.path.dirname(__file__), '..//', 'core/utils/templates').replace('\\', '/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -167,3 +167,11 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+SENDGRID_API_KEY = 'smtp.sendgrid.net'
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'NicolasTest'
+EMAIL_HOST_PASSWORD = 'Nicolas25'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
