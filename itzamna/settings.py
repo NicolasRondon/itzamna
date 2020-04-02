@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     # Thirds apps
     'django_extensions',
-    'rest_framework'
+    'rest_framework',
+    'django_rest_passwordreset',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
