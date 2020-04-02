@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # local apps
     'accounts.apps.AccountsConfig',
     'core.apps.CoreConfig',
+    'profiles.apps.ProfilesConfig',
     # Thirds apps
     'django_extensions',
     'rest_framework',
