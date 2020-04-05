@@ -17,7 +17,6 @@ from datetime import timedelta
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -27,11 +26,10 @@ SECRET_KEY = '7o+!0@tq4%9ch+f)vw4gx^bp3fz05qz+t!1bc=&bf!c%^w!a5e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
-
+CORS_ORIGIN_ALLOW_ALL = True
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,10 +41,16 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'core.apps.CoreConfig',
     'profiles.apps.ProfilesConfig',
+    'articles.apps.ArticlesConfig',
     # Thirds apps
     'django_extensions',
     'rest_framework',
+    'corsheaders',
     'django_rest_passwordreset',
+    'storages',
+    'ckeditor',
+    'ckeditor_uploader',
+
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -55,6 +59,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -66,7 +71,7 @@ ROOT_URLCONF = 'itzamna.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS':  [os.path.join(os.path.dirname(__file__), '..//', 'core/utils/templates').replace('\\', '/')],
+        'DIRS': [os.path.join(os.path.dirname(__file__), '..//', 'core/utils/templates').replace('\\', '/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,7 +86,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'itzamna.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -91,7 +95,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -111,7 +114,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -125,11 +127,19 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static/'
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+CKEDITOR_UPLOAD_PATH = 'article_images'
+
+CKEDITOR_RESTRICT_BY_DATE = False
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -177,3 +187,12 @@ EMAIL_HOST_USER = 'NicolasTest'
 EMAIL_HOST_PASSWORD = 'Nicolas25'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+AWS_ACCESS_KEY_ID = 'AKIASI2EMK63TJV52TFE'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'izatmna-academlo'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+S3_USE_SIGV4=True
