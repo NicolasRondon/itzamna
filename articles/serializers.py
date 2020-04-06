@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 class CreateArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
-        fields = ('title', 'body', 'author', 'image')
+        fields = ('id','title', 'body', 'author', 'image')
 
 
 class ArticleSerializer(serializers.ModelSerializer):
@@ -21,4 +21,4 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = ('id','title', 'body', 'author', 'slug', 'image')
+        fields = ('id', 'title', 'body', 'author', 'slug', 'image')
