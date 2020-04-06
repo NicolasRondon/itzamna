@@ -89,12 +89,24 @@ WSGI_APPLICATION = 'itzamna.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if 'TRAVIS' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.postgresql_psycopg2',
+            'NAME':     'travisci',
+            'USER':     'postgres',
+            'PASSWORD': '',
+            'HOST':     'localhost',
+            'PORT':     '',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -189,8 +201,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
-AWS_ACCESS_KEY_ID = 'AKIASI2EMK63TJV52TFE'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = '******'
+AWS_SECRET_ACCESS_KEY = '*****'
 AWS_STORAGE_BUCKET_NAME = 'izatmna-academlo'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
