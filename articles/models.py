@@ -11,6 +11,11 @@ class Article(models.Model):
     subtitle = models.CharField(blank=True, max_length=400)
     body = RichTextUploadingField()
     image = models.ImageField(upload_to='featured_image', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-created_at', 'title')
 
     def __str__(self):
         return self.title
