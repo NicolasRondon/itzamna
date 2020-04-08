@@ -89,19 +89,7 @@ WSGI_APPLICATION = 'itzamna.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if 'TRAVIS' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE':   'django.db.backends.postgresql_psycopg2',
-            'NAME':     'travisci',
-            'USER':     'postgres',
-            'PASSWORD': '',
-            'HOST':     'localhost',
-            'PORT':     '',
-        }
-    }
-else:
-    DATABASES = {
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
@@ -148,7 +136,7 @@ CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-CKEDITOR_UPLOAD_PATH = 'article_images'
+CKEDITOR_UPLOAD_PATH = 'article_images/'
 
 CKEDITOR_RESTRICT_BY_DATE = False
 
@@ -195,16 +183,16 @@ SIMPLE_JWT = {
 SENDGRID_API_KEY = 'smtp.sendgrid.net'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = '********'
-EMAIL_HOST_PASSWORD = '*****'
+EMAIL_HOST_USER = 'NicolasTest'
+EMAIL_HOST_PASSWORD = 'Nicolas25'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
-AWS_ACCESS_KEY_ID = '****'
-AWS_SECRET_ACCESS_KEY = '*****'
-AWS_STORAGE_BUCKET_NAME = '******'
+AWS_ACCESS_KEY_ID = 'AKIASI2EMK63YM556QH4'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'itzamna'
 AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
+AWS_DEFAULT_ACL = 'public-read'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 S3_USE_SIGV4=True
