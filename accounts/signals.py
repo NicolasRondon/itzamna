@@ -19,8 +19,10 @@ def send_email_user_created(sender, instance, created, **kwargs):
                 'gender': instance.gender
             }
         )
-        send_mail('Bienvenido', 'prueba', 'nuevo@academlo.com', [instance.email], fail_silently=True, html_message=html_message)
+        send_mail('Bienvenido', 'prueba', 'nuevo@academlo.com', [instance.email], fail_silently=True,
+                  html_message=html_message)
         print('Se envio el mail de creado')
+
 
 @receiver(post_save, sender=User)
 def create_related_profile(sender, instance, created, *args, **kwargs):

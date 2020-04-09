@@ -1,7 +1,13 @@
 from rest_framework import serializers
 
-from articles.models import Article
+from articles.models import Article, Comment
 from accounts.models import User
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ('id', 'author', 'body', 'parent_comment', 'created_at')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
 class CreateArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
-        fields = ('id','title', 'body', 'author', 'image')
+        fields = ('id', 'title', 'body', 'author', 'image')
 
 
 class ArticleSerializer(serializers.ModelSerializer):

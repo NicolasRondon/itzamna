@@ -6,6 +6,7 @@ class SetupBase(APITestCase):
     # Se crea un usuario para ejecutar los tests en el
     def setUp(self):
         self.user = User.objects.create_user('test_user', 'test_user@mail.com', '123456')
+        result = self.client.post('/api/token/', {'email': 'test_user@mail.com', 'password': '123456'})
 
 
 class AuthTestCase(SetupBase):
@@ -47,6 +48,7 @@ class UsersMethodsTestCase(SetupBase):
             "password": "prueba1234"
         })
         assert user.status_code == 201
+
 
 
 class NewProfileTestCase(SetupBase):
