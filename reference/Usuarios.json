@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Registrar",
+    "title": "Usuarios",
     "version": "1.0",
-    "description": "Desde este lugar un usuario se puede registar, para registrar un usuario no es necesario enviar un Bearer Token de Autorizacion"
+    "description": "Crear, Editar y Eliminar Usuarios."
   },
   "servers": [
     {
@@ -89,7 +89,8 @@
                     "gender": "M",
                     "password": "12345prueba"
                   }
-                }
+                },
+                "example-2": {}
               }
             }
           }
@@ -103,7 +104,85 @@
             "description": "Bad Request"
           }
         }
+      },
+      "get": {
+        "summary": "Listar  Usuarios",
+        "tags": [
+          "Usuarios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "operationId": "get-api-v1-users",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "maxLength": 0,
+              "minLength": 0
+            },
+            "in": "header",
+            "name": "Bearer Token",
+            "description": "JWT",
+            "required": true
+          }
+        ],
+        "description": "Lista todos los usurios registrados es necesario estar autenticado. \n> Debes enviar token de acceso"
+      }
+    },
+    "/api/v1/users/{ID}/": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ID",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Usuario especifico",
+        "tags": [
+          "Usuarios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "operationId": "get-api-v1-users-ID",
+        "description": "# Recibe un usuario especifico",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Bearer Token",
+            "required": true,
+            "description": "Token de acceso"
+          }
+        ]
       }
     }
+  },
+  "components": {
+    "securitySchemes": {
+      "API Key - 1": {
+        "name": "API Key",
+        "type": "apiKey",
+        "in": "query"
+      }
+    },
+    "schemas": []
   }
 }

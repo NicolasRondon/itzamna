@@ -2,9 +2,13 @@
 tags: [Registrar, Usuarios]
 ---
 
-# Registrar-o-Crear-Usuario
+# Registrar o Crear Usuario
 
 Se crea un modelo User dentro de la app accounts este modelo hereda de AbstractUser, con todos los campos necesarios
+
+Por defecto Django usa el username para la autenticación, Itzamná Usa el email
+> **USERNAME_FIELD** = 'email'
+
 
 ```python
 class User(AbstractUser):
