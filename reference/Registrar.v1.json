@@ -1,0 +1,109 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Registrar",
+    "version": "1.0",
+    "description": "Desde este lugar un usuario se puede registar, para registrar un usuario no es necesario enviar un Bearer Token de Autorizacion"
+  },
+  "servers": [
+    {
+      "url": "APIURL"
+    }
+  ],
+  "paths": {
+    "/api/v1/users/": {
+      "post": {
+        "summary": "Crea un usuario",
+        "tags": [
+          "Registrar",
+          "Usuarios"
+        ],
+        "operationId": "post-api-v1-register",
+        "description": "# Crear Usuario\n\nNo es necesario enviar un Bearer Token al momento de registrarse.\n> Los campos  **first_name, last_name, password, username, email, gender, course, password** son obligatorios  \n\n> No pueden existir dos usuarios con el mismo username o email\n",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": "Carlos",
+                "description": "Json que se envia junto a la peticion POST",
+                "properties": {
+                  "first_name": {
+                    "type": "string",
+                    "example": "Carlos",
+                    "description": "Nombre"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "example": "Jimenez",
+                    "description": "Apellido"
+                  },
+                  "username": {
+                    "type": "string",
+                    "description": "Nombre de Usuario",
+                    "example": "Khronus"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "test@email.com",
+                    "description": "Email del usuario"
+                  },
+                  "course": {
+                    "type": "string",
+                    "example": "E2020",
+                    "description": "Cohorte a la que pertenece"
+                  },
+                  "gender": {
+                    "type": "string",
+                    "example": "F",
+                    "description": "Sexo del usuario"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "1234password",
+                    "minLength": 8,
+                    "description": "Contraseña"
+                  }
+                },
+                "required": [
+                  "first_name",
+                  "last_name",
+                  "username",
+                  "email",
+                  "course",
+                  "gender",
+                  "password"
+                ]
+              },
+              "examples": {
+                "Ejemplo": {
+                  "value": {
+                    "username": "test",
+                    "email": "test@gmail.com",
+                    "first_name": "Andres",
+                    "last_name": "Jimenez",
+                    "course": "E2020",
+                    "gender": "M",
+                    "password": "12345prueba"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  }
+}
