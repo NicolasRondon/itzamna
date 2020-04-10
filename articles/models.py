@@ -26,7 +26,7 @@ class Comment(models.Model):
     body = models.TextField(blank=False)
     parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, related_name='comments', on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.id) + self.author.username

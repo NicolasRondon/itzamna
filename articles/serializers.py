@@ -10,6 +10,12 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ('id', 'author', 'body', 'parent_comment', 'created_at')
 
 
+class CreateCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ('author', 'body', 'parent_comment')
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -19,12 +25,13 @@ class UserSerializer(serializers.ModelSerializer):
 class CreateArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
-        fields = ('id', 'title', 'body', 'author', 'image')
+        fields = ('id', 'title', 'body', 'author', 'image', 'comments', 'subtitle')
 
 
 class ArticleSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True)
+    comments = CommentSerializer(read_only=True, many=True)
 
     class Meta:
         model = Article
-        fields = ('id', 'title', 'body', 'author', 'slug', 'image', 'created_at', 'updated_at')
+        fields = "__all__"

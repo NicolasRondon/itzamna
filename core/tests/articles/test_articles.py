@@ -39,3 +39,10 @@ class ArticleTestCase(SetupBase):
         token = result.data['access']
         article = self.client.delete('/api/v1/articles/1/', HTTP_AUTHORIZATION='Bearer {0}'.format(token))
         assert article.status_code == 204
+
+    def test_article_has_no_comments(self):
+        self.test_create()
+        result = self.client.post('/api/token/', {'email': 'test_user@mail.com', 'password': '123456'})
+        token = result.data['access']
+        article = self.client.get('/api/v1/articles/1/comments/')
+        assert article.status_code == 404

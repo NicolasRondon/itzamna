@@ -92,3 +92,13 @@ db.sqlite3
 .idea/
 manage.py
 
+
+accounts/migrations/0001_initial.py
+
+articles/migrations/0001_initial.py
+
+articles/migrations/0002_auto_20200410_0319.py
+
+profiles/migrations/0001_initial.py
+
+profiles/migrations/0002_profile_follows.py
