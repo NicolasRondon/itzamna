@@ -30,7 +30,6 @@ class ArticleViewSet(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
 
-
     def get_permissions(self):
         if self.action in ['update', 'partial_update', 'destroy']:
             self.permission_classes = [IsOwnerOrReadOnly]
@@ -43,4 +42,3 @@ class ArticleViewSet(viewsets.ModelViewSet):
         if self.action == 'create':
             return CreateArticleSerializer
         return ArticleSerializer
-

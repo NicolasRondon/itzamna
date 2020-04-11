@@ -49,6 +49,14 @@ class UsersMethodsTestCase(SetupBase):
         })
         assert user.status_code == 201
 
+    # Se comprueba que solo el usuario puede editar su propio usuario
+    def test_edit_user(self):
+        result = self.client.post('/api/token/', {'email': 'test_user@mail.com', 'password': '123456'})
+        token = result.data['access']
+        user_result = self.client.patch('/api/v1/users/1/', {'name': 'editado'},
+                                     HTTP_AUTHORIZATION='Bearer {0}'.format(token))
+        assert  user_result.status_code == 200
+
 
 
 class NewProfileTestCase(SetupBase):
