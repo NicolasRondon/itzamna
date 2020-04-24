@@ -33,13 +33,12 @@ class CreateArticleSerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True)
     comments = CommentSerializer(read_only=True, many=True)
-    # likes = VoteSerializer(read_only=True, sourcerue)
-    likes = serializers.SerializerMethodField(method_name='get_likes_count')
+    likes = serializers.SerializerMethodField(read_only=True)
 
 
     class Meta:
         model = Article
         fields = "__all__"
 
-    def get_likes_count(self, value):
-        return Vote.objects.filter(value=True).count()
+    def get_likes(self, obj):
+        return obj.likes.filter(value=True).count()

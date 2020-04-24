@@ -6,6 +6,6 @@ from votes.models import Vote
 class VoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vote
-        fields = ('value',)
+        fields = "__all__"
 
 
