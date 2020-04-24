@@ -9,7 +9,8 @@ class ArticleTestCase(SetupBase):
 
     def test_create(self):
         # Se comprueba que un usuario autenticado pueda crear un artículo y evita creación por parte de no autorizados
-        result = self.client.post('/api/token/', {'email': 'test_user@mail.com', 'password': '123456'})
+        result = self.client.post('/api/token/',
+                                  {'email': 'test_user@mail.com', 'password': '123456'})
         token = result.data['access']
         article = self.client.post('/api/v1/articles/', {
             "title": "Test Article",
@@ -35,14 +36,17 @@ class ArticleTestCase(SetupBase):
     def test_delete_article(self):
         # Se comprueba que solo el autor pueda eliminar un artículo
         self.test_create()
-        result = self.client.post('/api/token/', {'email': 'test_user@mail.com', 'password': '123456'})
+        result = self.client.post('/api/token/',
+                                  {'email': 'test_user@mail.com', 'password': '123456'})
         token = result.data['access']
-        article = self.client.delete('/api/v1/articles/1/', HTTP_AUTHORIZATION='Bearer {0}'.format(token))
+        article = self.client.delete('/api/v1/articles/1/',
+                                     HTTP_AUTHORIZATION='Bearer {0}'.format(token))
         assert article.status_code == 204
 
     def test_article_has_no_comments(self):
         self.test_create()
-        result = self.client.post('/api/token/', {'email': 'test_user@mail.com', 'password': '123456'})
+        result = self.client.post('/api/token/',
+                                  {'email': 'test_user@mail.com', 'password': '123456'})
         token = result.data['access']
         article = self.client.get('/api/v1/articles/1/comments/')
         assert article.status_code == 404

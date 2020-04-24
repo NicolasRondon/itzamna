@@ -11,7 +11,13 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+import environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False),
+)
+# reading .env file
+environ.Env.read_env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from datetime import timedelta
 
@@ -21,10 +27,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '7o+!0@tq4%9ch+f)vw4gx^bp3fz05qz+t!1bc=&bf!c%^w!a5e'
+SECRET_KEY =  env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,6 +48,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'profiles.apps.ProfilesConfig',
     'articles.apps.ArticlesConfig',
+    'votes.apps.VotesConfig',
     # Thirds apps
     'django_extensions',
     'rest_framework',
@@ -56,10 +63,10 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -180,20 +187,25 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-SENDGRID_API_KEY = 'smtp.sendgrid.net'
+SENDGRID_API_KEY = env('SENDGRID_API_KEY')
 
-EMAIL_HOST = '*****'
-EMAIL_HOST_USER = '****'
-EMAIL_HOST_PASSWORD = '****'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_HOST = env('SENDGRID_API_KEY')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
 
-AWS_ACCESS_KEY_ID = '*********'
-AWS_SECRET_ACCESS_KEY = '*******'
-AWS_STORAGE_BUCKET_NAME = 'your-bucket'
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = 'public-read'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_FILE_OVERWRITE=False
+AWS_DEFAULT_ACL='public-read'
+DEFAULT_FILE_STORAGE='storages.backends.s3boto3.S3Boto3Storage'
 S3_USE_SIGV4=True
-AWS_QUERYSTRING_AUTH = False
+AWS_QUERYSTRING_AUTH=False
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}

@@ -59,6 +59,7 @@ class UsersMethodsTestCase(SetupBase):
 
 
 
+
 class NewProfileTestCase(SetupBase):
 
     # Test que prueba que un perfil se crea después de crear un usuario

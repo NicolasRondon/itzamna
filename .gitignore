@@ -90,7 +90,6 @@ local_settings.py
 .env
 db.sqlite3
 .idea/
-manage.py
 
 
 accounts/migrations/0001_initial.py
