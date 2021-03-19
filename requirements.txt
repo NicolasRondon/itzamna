@@ -16,7 +16,7 @@ django-js-asset==1.2.2
 django-rest-passwordreset==1.1.0
 django-storages==1.9.1
 django-templated-mail==1.1.1
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 djangorestframework-simplejwt==4.4.0
 docutils==0.15.2
 idna==2.9
